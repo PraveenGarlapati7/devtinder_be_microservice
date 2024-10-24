@@ -1,16 +1,18 @@
 const express = require('express');
 const app = express();
 
-// app.use("/", (req, res) => {
-//     res.send("Hello Praveen")
-// })
-
-app.use("/test", (req, res) => {
-    res.send("Hello hello hello.....")
-})
-
-app.use("/hello", (req, res) => {
-    res.send("Hello from Server")
+app.get("/user", (req, res, next) => {
+    console.log("Inside request handler 1");
+    // res.send("Response 1");
+    next();
+},(req, res, next) => {
+    console.log("Inside request handler 2");
+    // res.send("Response 2");
+    next();
+}, (req, res, next) => {
+    console.log("Inside request handler 3");
+    res.send("Response 3");
+    // next();
 })
 
 app.listen(7777, () => {
